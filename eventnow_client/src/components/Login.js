@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const Login = () => {
 
@@ -20,6 +21,7 @@ const Login = () => {
     
 
     return (
+      <div>
         <form onSubmit = {handleSubmit}>
           <fieldset>
           <h1>Login: </h1>
@@ -39,6 +41,8 @@ const Login = () => {
           </fieldset>
           
         </form>
+        <Link to="/signup">Not a user? Sign up for free today!</Link>
+    </div>
     )
 }
 

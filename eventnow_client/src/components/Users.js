@@ -7,7 +7,7 @@ const Users = () => {
     const [newData, setData] = useState([])
 
     useEffect(() => {
-      axios.get("http://localhost:3000/users")
+      axios.get("http://localhost:3000/me")
       .then(resp => {
         console.log(resp.data)
         setData(resp.data);
@@ -16,10 +16,10 @@ const Users = () => {
         console.log("error", error);
       })},[])
 
-const username = newData.map(user => <h2 key={user.id}>{user.username}</h2> )
+
     return (
         <div>
-            {username}
+            {newData}
         </div>
     )
 }

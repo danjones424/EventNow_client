@@ -5,25 +5,17 @@ import axios from 'axios'
 
 function App() {
 
-  const [newData, setData] = useState([])
-
-  useEffect(() => {
-    axios.get("http://localhost:3000/users")
-    .then(resp => {
-      console.log(resp.data)
-      setData(resp.data);
-    })
-    .catch(error => {
-      console.log("error", error);
-    })},[])
-
 
   return (
     <div className="App">
       <h1>EventNow</h1>
-      <Link to="/login">Login</Link>
+      <nav>
+      <Link to="/users">Login</Link>
       <br></br>
-      <Link to="/users" newData={newData}>Users</Link>
+      <Link to="/usernames">Users</Link>
+      <br></br>
+      <Link to="signup">Sign Up</Link>
+      </nav>
     </div>
   );
 }

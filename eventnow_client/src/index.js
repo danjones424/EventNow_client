@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './components/Login';
 import Users from './components/Users';
+import Signup from './components/Signup';
 
 
 
@@ -14,8 +15,9 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="login" element={<Login />} />
-      <Route path="users" element={<Users />} />
+      <Route path="users" element={<Login />} />
+      <Route path="usernames" element={<Users />} />
+      <Route path="signup" element={<Signup />} />
     </Routes>
   </BrowserRouter>,
   rootElement
