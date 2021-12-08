@@ -15,32 +15,21 @@ import axios from 'axios';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
-  const [newData, setData] = useState([])
+ 
+		
+			function handleLogin() {
+				setLoggedIn(true);
+			}
 
-
-	function handleLogin() {
-		setLoggedIn(true);
-	}
-  // useEffect(() => {
-    axios.get("/me")
-    .then(resp => {
-      console.log(resp.data)
-      setData(resp.data);
-    })
-    .catch(error => {
-      console.log("error", error);
-    })
-    const name = newData.username
-    console.log(name)
-
+	
+	
+	
+	
+	
 	if (!loggedIn) return <NewLogin handleLogin={handleLogin} />;
-
-  
-    
 	return (
 		<div className="App">
       <Navbar />;
-			<h1 className="company_name">Welcome to EventsNow, {name}</h1>
 			
 			<Routes>
 				<Route path="/" element={<Home />} />
