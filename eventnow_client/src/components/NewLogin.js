@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import axios from 'axios';
 
-const Login = () => {
+const NewLogin = ({ handleLogin }) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -27,6 +27,7 @@ const Login = () => {
 			})
 			.then((resp) => {
 				console.log(resp);
+				handleLogin();
 			})
 			.catch((error) => {
 				console.log('error', error);
@@ -84,4 +85,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default NewLogin;
