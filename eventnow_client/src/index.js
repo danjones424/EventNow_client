@@ -4,18 +4,20 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Login from './components/Login';
 import Users from './components/Users';
 import Signup from './components/Signup';
+import Navbar from './components/Navbar';
+import NewLogin from './components/NewLogin';
 
 
 
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
+    <Navbar />
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="users" element={<Login />} />
+      <Route path="login" element={<NewLogin />} />
       <Route path="usernames" element={<Users />} />
       <Route path="signup" element={<Signup />} />
     </Routes>

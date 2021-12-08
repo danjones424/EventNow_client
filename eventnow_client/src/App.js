@@ -1,20 +1,19 @@
 import './App.css';
-import {Link} from 'react-router-dom'
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+// import {Link} from 'react-router-dom'
+import React from 'react'
 
 function App() {
 
 
   return (
     <div className="App">
-      <h1>EventNow</h1>
+      <h1 className="company_name">EventsNow</h1>
       <nav>
-      <Link to="/users">Login</Link>
-      <br></br>
+      {/* <Link to="/users">Login</Link>
+    
       <Link to="/usernames">Users</Link>
-      <br></br>
-      <Link to="signup">Sign Up</Link>
+      
+      <Link to="signup">Sign Up</Link> */}
       </nav>
     </div>
   );
