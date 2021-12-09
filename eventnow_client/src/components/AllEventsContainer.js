@@ -3,17 +3,20 @@ import { useEffect, useState } from 'react';
 import EventItem from './EventItem';
 
 const AllEventsContainer = ({ currentUser }) => {
-	const [fetchedEvents, setFetchedEvents] = useState({});
+	const [fetchedEvents, setFetchedEvents] = useState([]);
 	const [contentLoaded, setContentLoaded] = useState(false);
 	// const [filteredEvents, setFilteredEvents] = useState({});
 
 	useEffect(() => {
-		fetch('/events')
+		fetch('/others')
 			.then((r) => r.json())
 			.then((events) => {
 				// FILTER EVENTS WHERE currentUser.id !== attendances.user_id
+
 				setFetchedEvents(events);
 				setContentLoaded(true);
+				console.log('Fetched Again!');
+				debugger;
 			});
 	}, []);
 
@@ -23,7 +26,7 @@ const AllEventsContainer = ({ currentUser }) => {
 				<EventItem
 					handleRSVP={handleRSVP}
 					key={eventItem.id}
-					eventItem={eventItem}
+					eventItem={eventItem.event}
 				/>
 			);
 		});
@@ -32,7 +35,6 @@ const AllEventsContainer = ({ currentUser }) => {
 	const handleRSVP = (e) => {
 		const eventID = e.id;
 		const userID = currentUser;
-
 		fetch('/attendances', {
 			method: 'POST',
 			headers: {
@@ -45,7 +47,7 @@ const AllEventsContainer = ({ currentUser }) => {
 			}),
 		})
 			.then((r) => r.json())
-			.then((attendance) => console.log('Attendance Creaed!'))
+			.then(console.log('Attendance created!'))
 			.catch((error) => {
 				console.error('Error:', error);
 			});
