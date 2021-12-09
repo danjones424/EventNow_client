@@ -1,6 +1,9 @@
 import { Button, Paper } from '@material-ui/core';
+import { useState } from 'react';
 
-const EventItem = ({ eventItem, handleRSVP }) => {
+const EventItem = ({ eventItem, handleRSVP, currentUser, handleBail }) => {
+	// const [bailButton, setBailButton] = useState(true);
+
 	const paperStyle = {
 		padding: 20,
 		height: 'auto',
@@ -14,19 +17,42 @@ const EventItem = ({ eventItem, handleRSVP }) => {
 		backgroundColor: '#F0F757',
 	};
 
+	const event = eventItem.event;
+
+	console.log(eventItem);
+
+	// console.log(currentUser);
+	// const bailOrRSVP = () => {
+	// 	if (eventItem.user_id === currentUser) {
+	// 		setBailButton(false);
+	// 	} else {
+	// 		setBailButton(true);
+	// 	}
+	// };
+
 	return (
 		<div>
 			<Paper elevation={10} style={paperStyle}>
-				<h2>{eventItem.event_name}</h2>
-				<h3>{eventItem.category}</h3>
-				<p>{eventItem.description}</p>
-				<Button
-					variant="contained"
-					style={btnstyle}
-					onClick={() => handleRSVP(eventItem)}
-				>
-					RSVP
-				</Button>
+				<h2>{event.event_name}</h2>
+				<h3>{event.category}</h3>
+				<p>{event.description}</p>
+				{eventItem.user_id === currentUser ? (
+					<Button
+						variant="contained"
+						style={btnstyle}
+						onClick={() => handleBail(eventItem)}
+					>
+						Bail
+					</Button>
+				) : (
+					<Button
+						variant="contained"
+						style={btnstyle}
+						onClick={() => handleRSVP(eventItem)}
+					>
+						RSVP
+					</Button>
+				)}
 			</Paper>
 		</div>
 	);

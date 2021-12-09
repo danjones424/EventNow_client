@@ -8,33 +8,34 @@ const AllEventsContainer = ({ currentUser }) => {
 	// const [filteredEvents, setFilteredEvents] = useState({});
 
 	useEffect(() => {
-		fetch('/others')
+		fetch('/parties')
 			.then((r) => r.json())
 			.then((events) => {
 				// FILTER EVENTS WHERE currentUser.id !== attendances.user_id
-				console.log(events);
+
 				setFetchedEvents(events);
 				setContentLoaded(true);
 				console.log('Fetched Again!');
-				debugger;
 			});
 	}, []);
 
+	console.log(fetchedEvents.length);
 	const renderEvent = (eventsToRender) => {
 		return eventsToRender.map((eventItem) => {
 			return (
 				<EventItem
 					handleRSVP={handleRSVP}
-					key={eventItem.id}
-					eventItem={eventItem.event}
+					key={Math.floor(Math.random() * 10000)}
+					eventItem={eventItem}
 				/>
 			);
 		});
 	};
 
 	const handleRSVP = (e) => {
-		const eventID = e.id;
+		const eventID = e.event.id;
 		const userID = currentUser;
+
 		fetch('/attendances', {
 			method: 'POST',
 			headers: {
@@ -47,7 +48,7 @@ const AllEventsContainer = ({ currentUser }) => {
 			}),
 		})
 			.then((r) => r.json())
-			.then(console.log('Attendance created!'))
+			.then((att) => console.log(att.event))
 			.catch((error) => {
 				console.error('Error:', error);
 			});

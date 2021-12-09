@@ -52,8 +52,7 @@ function App() {
 					element={<Home currentUser={currentUser} />}
 				/>
 				{/* <Route path="login" element={<NewLogin />} /> */}
-				<Route path="usernames" element={<Users />} />
-				<Route path="signup" element={<Signup />} />
+			
 			</Routes>
 		</div>
 	);

@@ -8,6 +8,7 @@ import MyEventsContainer from './MyEventsContainer';
 const Home = ({ currentUser }) => {
 	const [createMode, setCreateMode] = useState(false);
 	const [showEvents, setShowEvents] = useState(false);
+	const [showMyEvents, setShowMyEvents] = useState(false);
 
 	// const [newData, setData] = useState([]);
 
@@ -34,6 +35,7 @@ const Home = ({ currentUser }) => {
 			<h1 className="company_name">
 				Welcome to EventsNow, {currentUser.username}!
 			</h1>
+			{createMode ? <EventCreateForm /> : null}
 			<Button
 				onClick={() => {
 					setShowEvents(!showEvents);
@@ -45,10 +47,19 @@ const Home = ({ currentUser }) => {
 				<AllEventsContainer currentUser={currentUser} />
 			) : null}
 			<Button onClick={handleCreateMode}>Create Event?</Button>
-			{createMode ? <EventCreateForm /> : null}
 			{/* RENDER ALL EVENTS */}
-			<MyEventsContainer />
 			{/* BUTTON THAT RENDERS MY EVENTS */}
+
+			<Button
+				onClick={() => {
+					setShowMyEvents(!showMyEvents);
+				}}
+			>
+				My Events
+			</Button>
+			{showMyEvents ? (
+				<MyEventsContainer key={10} currentUser={currentUser} />
+			) : null}
 			{/* INSIDE OF MYEVENTS COMPONENT, BUTTON TO RENDER EVENT FORM, ENABLING EVENT CREATION */}
 		</div>
 	);
