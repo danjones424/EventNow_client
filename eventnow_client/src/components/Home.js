@@ -1,31 +1,39 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Button } from '../styles/Navbar.style';
 import AllEventsContainer from './AllEventsContainer';
+import EventCreateForm from './EventCreateForm';
 import MyEventsContainer from './MyEventsContainer';
 
-const Home = () => {
+const Home = ({ currentUser }) => {
+	const [createMode, setCreateMode] = useState(false);
 	// const [newData, setData] = useState([]);
-	let name;
-	useEffect(() => {
-		axios
-			.get('/me')
-			.then((resp) => {
-				console.log(resp.data);
-				// setData(resp.data);
-				name = resp.data.username;
-			})
-			.catch((error) => {
-				console.log('error', error);
-			});
-	}, []);
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get('/me')
+	// 		.then((resp) => {
+	// 			console.log(resp.data);
+	// 			// setData(resp.data);
+	// 			name = resp.data.username;
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log('error', error);
+	// 		});
+	// }, []);
 
 	// const name = newData.username;
-	console.log(name);
+	const handleCreateMode = () => {
+		setCreateMode(!createMode);
+	};
 
 	return (
 		<div>
-			<h1 className="company_name">Welcome to EventsNow, {name}</h1>
-
+			<h1 className="company_name">
+				Welcome to EventsNow, {currentUser.username}!
+			</h1>
+			<Button onClick={handleCreateMode}>Create Event?</Button>
+			{createMode ? <EventCreateForm /> : null}
 			{/* RENDER ALL EVENTS */}
 			<AllEventsContainer />
 			<MyEventsContainer />

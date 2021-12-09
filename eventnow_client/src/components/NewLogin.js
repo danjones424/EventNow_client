@@ -6,16 +6,15 @@ import {
 	Avatar,
 	TextField,
 	Button,
-	Typography
+	Typography,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Alert from '@material-ui/lab/Alert';
 
-
 import axios from 'axios';
 
 const NewLogin = ({ handleLogin }) => {
-    const [alert, setAlert] = useState(false);
+	const [alert, setAlert] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -30,13 +29,12 @@ const NewLogin = ({ handleLogin }) => {
 			})
 			.then((resp) => {
 				console.log(resp);
-                setAlert(false)
+				setAlert(false);
 				handleLogin();
-                
 			})
 			.catch((error) => {
 				console.log('error', error);
-                setAlert(true)
+				setAlert(true);
 			});
 	};
 
@@ -51,7 +49,13 @@ const NewLogin = ({ handleLogin }) => {
 
 	return (
 		<Grid>
-            {alert ? <Alert severity='error'>Invalid Login. Check Username and/or Password</Alert> : <></>}
+			{alert ? (
+				<Alert severity="error">
+					Invalid Login. Check Username and/or Password
+				</Alert>
+			) : (
+				<></>
+			)}
 			<Paper elevation={10} style={paperStyle}>
 				<Grid align="center">
 					<Avatar style={avatarStyle}>
