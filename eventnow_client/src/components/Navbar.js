@@ -14,7 +14,7 @@ import {
 } from '../styles/Navbar.style';
 import LogoImg from '../Assets/Logo.png';
 
-const Navbar = ({ handleLogOut }) => {
+const Navbar = ({ handleLogOut, loggedIn }) => {
 	const [extendNavbar, setExtendNavbar] = useState(false);
 
 	return (
@@ -23,8 +23,8 @@ const Navbar = ({ handleLogOut }) => {
 				<LeftContainer>
 					<NavbarLinkContainer>
 						<NavbarLink to="/home">Home</NavbarLink>
-						<NavbarLink to="/login">Login</NavbarLink>
-						<NavbarLink to="/signup">Sign Up</NavbarLink>
+						{!loggedIn ? <NavbarLink to="/login">Login</NavbarLink> : null}
+						{!loggedIn ? <NavbarLink to="/signup">Sign Up</NavbarLink> : null}
 						<Button onClick={handleLogOut}>Log Out</Button>
 						<OpenLinksButton
 							onClick={() => {
@@ -42,10 +42,9 @@ const Navbar = ({ handleLogOut }) => {
 			{extendNavbar && (
 				<NavbarExtendedContainer>
 					<NavbarLink to="/">Home</NavbarLink>
-					<NavbarLinkExtended to="/login">Login</NavbarLinkExtended>
-					<NavbarLinkExtended to="/signup">
-						Sign Up
-					</NavbarLinkExtended>
+					{!loggedIn ?<NavbarLinkExtended to="/login">Login</NavbarLinkExtended> : null}
+					{!loggedIn ?<NavbarLinkExtended to="/signup">Sign Up</NavbarLinkExtended> : null}
+					
 				</NavbarExtendedContainer>
 			)}
 		</NavbarContainer>

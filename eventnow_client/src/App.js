@@ -44,7 +44,7 @@ function App() {
 	if (!loggedIn) return <NewLogin handleLogin={handleLogin} />;
 	return (
 		<div className="App">
-			<Navbar handleLogOut={handleLogOut} />;
+			<Navbar loggedIn={loggedIn} handleLogOut={handleLogOut} />;
 			<Routes>
 				<Route path="/" element={<Home currentUser={currentUser} />} />
 				<Route

@@ -11,6 +11,7 @@ const AllEventsContainer = ({ currentUser }) => {
 			.then((r) => r.json())
 			.then((events) => {
 				// FILTER EVENTS WHERE currentUser.id !== attendances.user_id
+				console.log(events)
 				setFetchedEvents(events);
 				setContentLoaded(true);
 			});
