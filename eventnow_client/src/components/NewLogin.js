@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import {
 	Grid,
 	Paper,
+	Button,
 	Avatar,
 	TextField,
-	Button,
 	Typography,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
