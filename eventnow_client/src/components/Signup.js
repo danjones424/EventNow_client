@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {
-	Grid,
-	Paper,
-	Button,
-	Avatar,
-	TextField
-} from '@material-ui/core';
+import { Grid, Paper, Button, Avatar, TextField } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Alert from '@material-ui/lab/Alert';
 
-const Signup = ({handleLogin}) => {
+const Signup = ({ handleLogin }) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [password_confirmation, setPasswordcon] = useState('');
@@ -29,12 +23,11 @@ const Signup = ({handleLogin}) => {
 				},
 			})
 			.then((resp) => {
-				handleLogin()
-	
+				handleLogin();
 			})
 			.catch((error) => {
-				console.log('error', error);
-				setAlert(true)
+				console.log('errors:', error);
+				setAlert(true);
 			});
 	};
 	const paperStyle = {
