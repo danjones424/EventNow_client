@@ -1,5 +1,5 @@
 import { Button, Paper } from '@material-ui/core';
-import { useState } from 'react';
+
 
 const EventItem = ({ eventItem, handleRSVP, currentUser, handleBail }) => {
 	// const [bailButton, setBailButton] = useState(true);

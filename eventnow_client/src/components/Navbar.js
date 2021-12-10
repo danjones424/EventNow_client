@@ -22,10 +22,10 @@ const Navbar = ({ handleLogOut, loggedIn }) => {
 			<NavbarInnerContainer>
 				<LeftContainer>
 					<NavbarLinkContainer>
-						<NavbarLink to="/home">Home</NavbarLink>
-						{!loggedIn ? <NavbarLink to="/login">Login</NavbarLink> : null}
+						{loggedIn ? <NavbarLink to="/" >Home</NavbarLink> : null}
+						{!loggedIn ? <NavbarLink to="/">Login</NavbarLink> : null}
 						{!loggedIn ? <NavbarLink to="/signup">Sign Up</NavbarLink> : null}
-						<Button onClick={handleLogOut}>Log Out</Button>
+						{loggedIn ? <Button onClick={handleLogOut}>Log Out</Button> : null}
 						<OpenLinksButton
 							onClick={() => {
 								setExtendNavbar((value) => !value);
@@ -41,9 +41,10 @@ const Navbar = ({ handleLogOut, loggedIn }) => {
 			</NavbarInnerContainer>
 			{extendNavbar && (
 				<NavbarExtendedContainer>
-					<NavbarLink to="/">Home</NavbarLink>
-					{!loggedIn ?<NavbarLinkExtended to="/login">Login</NavbarLinkExtended> : null}
-					{!loggedIn ?<NavbarLinkExtended to="/signup">Sign Up</NavbarLinkExtended> : null}
+					{/* {loggedIn ? <NavbarLinkExtended to="/home">Home</NavbarLinkExtended> : null}
+						{!loggedIn ? <NavbarLinkExtended to="/login">Login</NavbarLinkExtended> : null}
+						{!loggedIn ? <NavbarLinkExtended to="/signup">Sign Up</NavbarLinkExtended> : null}
+						{loggedIn ? <NavbarLinkExtended onClick={handleLogOut}>Log Out</NavbarLinkExtended> : null} */}
 					
 				</NavbarExtendedContainer>
 			)}

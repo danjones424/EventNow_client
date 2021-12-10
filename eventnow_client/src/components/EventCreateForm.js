@@ -1,5 +1,5 @@
-import { Paper, TextField, Grid, Avatar } from '@material-ui/core';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { Paper, TextField, Grid} from '@material-ui/core';
+
 
 import { useState, useEffect } from 'react';
 
@@ -27,7 +27,7 @@ const EventCreateForm = ({ currentUser, eventCreatedFunction }) => {
 			});
 	}, []);
 
-	const avatarStyle = { backgroundColor: '#CC5A71' };
+	
 
 	// const [newEvent, setNewEvent] = useState({});
 
@@ -37,14 +37,14 @@ const EventCreateForm = ({ currentUser, eventCreatedFunction }) => {
 		setEventForm({ ...eventForm, [name]: value });
 	};
 
-	const configObj = {
-		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(eventForm),
-	};
+	// const configObj = {
+	// 	method: 'POST',
+	// 	headers: {
+	// 		Accept: 'application/json',
+	// 		'Content-Type': 'application/json',
+	// 	},
+	// 	body: JSON.stringify(eventForm),
+	// };
 
 	// const attendanceObj = {
 	// 	user_id: currentUser.id,
@@ -89,7 +89,7 @@ const EventCreateForm = ({ currentUser, eventCreatedFunction }) => {
 		margin: '20px auto',
 	};
 
-	const [value, onChange] = useState(new Date());
+	// const [value, onChange] = useState(new Date());
 
 	return (
 		<div className="event-form">

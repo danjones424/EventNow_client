@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {
+	Grid,
+	Paper,
+	Button,
+	Avatar,
+	TextField
+} from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Alert from '@material-ui/lab/Alert';
 
-const Signup = () => {
+const Signup = ({handleLogin}) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [password_confirmation, setPasswordcon] = useState('');
 	const [email, setEmail] = useState('');
+	const [alert, setAlert] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -19,52 +29,77 @@ const Signup = () => {
 				},
 			})
 			.then((resp) => {
-				console.log(resp);
+				handleLogin()
+	
 			})
 			.catch((error) => {
 				console.log('error', error);
+				setAlert(true)
 			});
 	};
-
+	const paperStyle = {
+		padding: 20,
+		height: '70vh',
+		width: '50vh',
+		margin: '20px auto',
+	};
+	const avatarStyle = { backgroundColor: '#CC5A71' };
+	const btnstyle = { margin: '8px 0', backgroundColor: '#F0F757' };
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<fieldset>
-					<h1>Signup: </h1>
-					<label>Username: </label>
-					<br></br>
-					<input
-						name="username"
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-					<br></br>
-					<label>Email: </label>
-					<br></br>
-					<input
-						name="email"
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<br></br>
-					<label>Password: </label>
-					<br></br>
-					<input
-						name="password"
-						type="password"
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<br></br>
-					<label>Confirm Password: </label>
-					<br></br>
-					<input
-						name="password_confirmation"
-						type="password"
-						onChange={(e) => setPasswordcon(e.target.value)}
-					/>
-					<br></br>
-					<button type="submit">Submit</button>
-				</fieldset>
-			</form>
-		</div>
+		<Grid onSubmit={handleSubmit}>
+			{alert ? (
+				<Alert severity="error">
+					Invalid Login. Check Username and/or Password
+				</Alert>
+			) : null}
+			<Paper elevation={10} style={paperStyle}>
+				<Grid align="center">
+					<Avatar style={avatarStyle}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<h2>Sign Up</h2>
+				</Grid>
+				<TextField
+					label="Username"
+					placeholder="Enter username"
+					onChange={(e) => setUsername(e.target.value)}
+					fullWidth
+					required
+				/>
+				<TextField
+					label="Email"
+					placeholder="Enter Email"
+					onChange={(e) => setEmail(e.target.value)}
+					fullWidth
+					required
+				/>
+				<TextField
+					label="Password"
+					placeholder="Enter Password"
+					type="password"
+					onChange={(e) => setPassword(e.target.value)}
+					fullWidth
+					required
+				/>
+				<TextField
+					label="Confirm Password"
+					placeholder="Password"
+					type="password"
+					onChange={(e) => setPasswordcon(e.target.value)}
+					fullWidth
+					required
+				/>
+				<Button
+					type="submit"
+					onClick={handleSubmit}
+					variant="contained"
+					style={btnstyle}
+					fullWidth
+				>
+					Sign up
+				</Button>
+			</Paper>
+		</Grid>
 	);
 };
 

@@ -2,18 +2,17 @@ import './App.css';
 // import {Link} from 'react-router-dom'
 import React from 'react';
 import Home from './components/Home';
-import { useState, useEffect } from 'react';
-import Users from './components/Users';
-import Signup from './components/Signup';
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 import NewLogin from './components/NewLogin';
 import { Route, Routes } from 'react-router-dom';
+import Signup from './components/Signup';
 
 // import axios from 'axios';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [currentUser, setCurrentUser] = useState({});
+	
 	function handleLogin() {
 		setLoggedIn(true);
 	}
@@ -21,39 +20,44 @@ function App() {
 		setLoggedIn(false);
 	}
 
-	useEffect(() => {
-		fetch('/me')
-			.then((r) => r.json())
-			.then((user) => {
-				console.log(user);
-				if (user.errors) {
-					setLoggedOut();
-				} else {
-					setLoggedIn(true);
-					setCurrentUser(user);
-				}
-			});
-	}, []);
+	// useEffect(() => {
+	// 	fetch('/me')
+	// 		.then((r) => r.json())
+	// 		.then((user) => {
+	// 			if (user.errors) {
+	// 				setLoggedOut();
+	// 			} else {
+	// 				console.log(user)
+	// 				setLoggedIn(true);
+	// 				setCurrentUser(user);
+	// 			}
+	// 		});
+	// }, []);
 
 	const handleLogOut = () => {
 		fetch('/logout', { method: 'DELETE' })
 			.then((r) => r.json())
-			.then(setLoggedIn(false))
+			.then(setLoggedOut()) 
 			.catch((error) => console.log(error));
 	};
 
-	if (!loggedIn) return <NewLogin handleLogin={handleLogin} />;
 	return (
 		<div className="App">
-			<Navbar loggedIn={loggedIn} handleLogOut={handleLogOut} />;
-			<Routes>
-				<Route path="/" element={<Home currentUser={currentUser} />} />
+			<Navbar loggedIn={loggedIn} handleLogOut={handleLogOut} />
+			{!loggedIn ? 
+				<Routes>
+				<Route path="/" element={<NewLogin handleLogin={handleLogin}/>} />
+				<Route path="login" element={<NewLogin handleLogin={handleLogin}/>} />
+				<Route path="signup" element={<Signup handleLogin={handleLogin} />} />
+				</Routes>
+			: <Routes>
+				<Route path="/" element={<Home  />} />
 				<Route
 					path="home"
-					element={<Home currentUser={currentUser} />}
+					element={<Home />}
 				/>
 				{/* <Route path="login" element={<NewLogin />} /> */}
-			</Routes>
+			</Routes>}
 		</div>
 	);
 }

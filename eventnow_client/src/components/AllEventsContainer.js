@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import EventItem from './EventItem';
 
@@ -11,7 +10,7 @@ const AllEventsContainer = ({ currentUser }) => {
 		fetch('/others')
 			.then((r) => r.json())
 			.then((events) => {
-				// FILTER EVENTS WHERE currentUser.id !== attendances.user_id
+				console.log(events)
 				setFetchedEvents(events);
 				setContentLoaded(true);
 				console.log('Fetched Again!');
