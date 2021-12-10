@@ -30,12 +30,17 @@ const Home = ({ currentUser }) => {
 		setCreateMode(!createMode);
 	};
 
+	const eventCreatedFunction = () => {
+		setCreateMode(false);
+	};
 	return (
 		<div>
 			<h1 className="company_name">
 				Welcome to EventsNow, {currentUser.username}!
 			</h1>
-			{createMode ? <EventCreateForm /> : null}
+			{createMode ? (
+				<EventCreateForm eventCreatedFunction={eventCreatedFunction} />
+			) : null}
 			<Button
 				onClick={() => {
 					setShowEvents(!showEvents);

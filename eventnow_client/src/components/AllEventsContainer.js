@@ -8,18 +8,17 @@ const AllEventsContainer = ({ currentUser }) => {
 	// const [filteredEvents, setFilteredEvents] = useState({});
 
 	useEffect(() => {
-		fetch('/parties')
+		fetch('/others')
 			.then((r) => r.json())
 			.then((events) => {
 				// FILTER EVENTS WHERE currentUser.id !== attendances.user_id
-
 				setFetchedEvents(events);
 				setContentLoaded(true);
 				console.log('Fetched Again!');
 			});
 	}, []);
 
-	console.log(fetchedEvents.length);
+	console.log(fetchedEvents);
 	const renderEvent = (eventsToRender) => {
 		return eventsToRender.map((eventItem) => {
 			return (

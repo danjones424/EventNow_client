@@ -8,6 +8,7 @@ import Signup from './components/Signup';
 import Navbar from './components/Navbar';
 import NewLogin from './components/NewLogin';
 import { Route, Routes } from 'react-router-dom';
+
 // import axios from 'axios';
 
 function App() {
@@ -52,7 +53,6 @@ function App() {
 					element={<Home currentUser={currentUser} />}
 				/>
 				{/* <Route path="login" element={<NewLogin />} /> */}
-			
 			</Routes>
 		</div>
 	);

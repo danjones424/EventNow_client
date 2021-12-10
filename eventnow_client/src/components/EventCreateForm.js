@@ -3,13 +3,17 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import { useState, useEffect } from 'react';
 
-const EventCreateForm = ({ currentUser }) => {
+const EventCreateForm = ({ currentUser, eventCreatedFunction }) => {
 	const [eventForm, setEventForm] = useState({
 		event_name: '',
 		category: '',
 		description: '',
 		date: '',
 		location_id: 3,
+		address: '',
+		city: '',
+		state: '',
+		zipcode: '',
 	});
 
 	useEffect(() => {
@@ -23,7 +27,6 @@ const EventCreateForm = ({ currentUser }) => {
 			});
 	}, []);
 
-	console.log(currentUser);
 	const avatarStyle = { backgroundColor: '#CC5A71' };
 
 	// const [newEvent, setNewEvent] = useState({});
@@ -63,6 +66,7 @@ const EventCreateForm = ({ currentUser }) => {
 			.then((event) => {
 				console.log(event);
 				// setNewEvent(event);
+				eventCreatedFunction();
 			});
 	};
 
@@ -80,12 +84,16 @@ const EventCreateForm = ({ currentUser }) => {
 	// }, [newEvent]);
 	const paperStyle = {
 		padding: 20,
-		height: '40vh',
-		width: '50vh',
+		height: 'auto',
+		width: '70vh',
 		margin: '20px auto',
 	};
+
+	const [value, onChange] = useState(new Date());
+
 	return (
 		<div className="event-form">
+			<div></div>
 			<Paper elevation={10} style={paperStyle}>
 				<Grid align="center">
 					<h2>Create Event</h2>
@@ -120,13 +128,51 @@ const EventCreateForm = ({ currentUser }) => {
 				<br></br>
 
 				<TextField
-					placeholder="Date"
+					placeholder="Date: YYYY/MM/DD"
 					fullWidth
 					name="date"
 					type="text"
 					onChange={handleForm}
 					required
 				></TextField>
+
+				<br></br>
+				<TextField
+					placeholder="Address"
+					fullWidth
+					name="address"
+					type="text"
+					onChange={handleForm}
+					required
+				></TextField>
+				<br></br>
+				<TextField
+					placeholder="City"
+					fullWidth
+					name="city"
+					type="text"
+					onChange={handleForm}
+					required
+				></TextField>
+				<br></br>
+				<TextField
+					placeholder="State"
+					fullWidth
+					name="state"
+					type="text"
+					onChange={handleForm}
+					required
+				></TextField>
+				<br></br>
+				<TextField
+					placeholder="Zipcode"
+					fullWidth
+					name="zipcode"
+					type="text"
+					onChange={handleForm}
+					required
+				></TextField>
+
 				<br></br>
 				<button onClick={handleSubmit}>Submit</button>
 			</Paper>
