@@ -1,24 +1,29 @@
 import { Button, Paper } from '@material-ui/core';
-import {useState} from 'react'
+import { useState } from 'react';
 import EditCard from './EditCard';
 
-
-
-const HostedEventItem = ({ handleDlete, eventItem, handleRSVP, currentUser, handleRefetch}) => {
+const HostedEventItem = ({
+	handleDlete,
+	eventItem,
+	handleRSVP,
+	currentUser,
+	handleRefetch,
+}) => {
 	const [edit, setEdit] = useState(false);
-	
+
 	const event = eventItem.event;
-	
+
 	const handleDelete = () => {
-        fetch(`/events/${event.id}`, {
+		fetch(`/events/${event.id}`, {
 			method: 'DELETE',
-		}).then((r) => r.json())
-		.then(handleRefetch())
-    }
+		})
+			.then((r) => r.json())
+			.then(handleRefetch());
+	};
 
 	const handleEdit = () => {
-		setEdit(!edit)
-	}
+		setEdit(!edit);
+	};
 	const paperStyle = {
 		padding: 20,
 		height: 'auto',
@@ -31,8 +36,6 @@ const HostedEventItem = ({ handleDlete, eventItem, handleRSVP, currentUser, hand
 		color: '#34344A',
 		backgroundColor: '#F0F757',
 	};
-
-	
 
 	console.log(eventItem);
 
@@ -47,31 +50,42 @@ const HostedEventItem = ({ handleDlete, eventItem, handleRSVP, currentUser, hand
 
 	return (
 		<div>
-			{edit === false ?
-			<Paper elevation={10} style={paperStyle}>
-				<h2>{event.event_name}</h2>
-				<h3>{event.category}</h3>
-				<p>{event.description}</p>
+			{edit === false ? (
+				<Paper elevation={10} style={paperStyle}>
+					<h2>{event.event_name}</h2>
+					<h3>{event.category}</h3>
+					<p>{event.description}</p>
+					<p>{event.date}</p>
+					<p>{event.address}</p>
+					<p>{event.city}</p>
+					<p>{event.state}</p>
+					<p>{event.zipcode}</p>
 					<div>
-					<Button
-						variant="contained"
-						style={btnstyle}
-						onClick={handleEdit}
-						
-					>
-						Edit
-					</Button>
-					<Button
-					variant="contained"
-					style={btnstyle}
-					onClick={() => handleDelete(eventItem)}
-				>
-					Delete
-				</Button>
-				</div>
-			</Paper> : <EditCard handleRefetch={handleRefetch} event={event} handleEdit={handleEdit}/>} 
+						<Button
+							variant="contained"
+							style={btnstyle}
+							onClick={handleEdit}
+						>
+							Edit
+						</Button>
+						<Button
+							variant="contained"
+							style={btnstyle}
+							onClick={() => handleDelete(eventItem)}
+						>
+							Delete
+						</Button>
+					</div>
+				</Paper>
+			) : (
+				<EditCard
+					handleRefetch={handleRefetch}
+					event={event}
+					handleEdit={handleEdit}
+				/>
+			)}
 		</div>
 	);
-			}
+};
 
 export default HostedEventItem;

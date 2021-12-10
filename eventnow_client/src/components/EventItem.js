@@ -1,6 +1,5 @@
 import { Button, Paper } from '@material-ui/core';
 
-
 const EventItem = ({ eventItem, handleRSVP, currentUser, handleBail }) => {
 	// const [bailButton, setBailButton] = useState(true);
 
@@ -36,6 +35,11 @@ const EventItem = ({ eventItem, handleRSVP, currentUser, handleBail }) => {
 				<h2>{event.event_name}</h2>
 				<h3>{event.category}</h3>
 				<p>{event.description}</p>
+				<p>{event.date}</p>
+				<p>{event.address}</p>
+				<p>{event.city}</p>
+				<p>{event.state}</p>
+				<p>{event.zipcode}</p>
 				{eventItem.user_id === currentUser ? (
 					<Button
 						variant="contained"
