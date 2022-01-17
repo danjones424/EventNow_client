@@ -48,7 +48,7 @@ const AllEventsContainer = ({ currentUser }) => {
 			}),
 		})
 			.then((r) => r.json())
-			.then((att) => console.log(att.event))
+			.then((data) => console.log(data))
 			.catch((error) => {
 				console.error('Error:', error);
 			});
