@@ -1,6 +1,6 @@
 import './App.css';
 // import {Link} from 'react-router-dom'
-import React from 'react';
+import React, { useEffect } from 'react';
 import Home from './components/Home';
 import { useState } from 'react';
 import Navbar from './components/Navbar';
@@ -12,7 +12,7 @@ import Signup from './components/Signup';
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
-	
+
 	function handleLogin() {
 		setLoggedIn(true);
 	}
@@ -20,44 +20,51 @@ function App() {
 		setLoggedIn(false);
 	}
 
-	// useEffect(() => {
-	// 	fetch('/me')
-	// 		.then((r) => r.json())
-	// 		.then((user) => {
-	// 			if (user.errors) {
-	// 				setLoggedOut();
-	// 			} else {
-	// 				console.log(user)
-	// 				setLoggedIn(true);
-	// 				setCurrentUser(user);
-	// 			}
-	// 		});
-	// }, []);
+	useEffect(() => {
+		fetch('/me')
+			.then((r) => r.json())
+			.then((user) => {
+				if (user.errors) {
+					setLoggedOut();
+				} else {
+					console.log(user);
+					setLoggedIn(true);
+				}
+			});
+	}, []);
 
 	const handleLogOut = () => {
 		fetch('/logout', { method: 'DELETE' })
 			.then((r) => r.json())
-			.then(setLoggedOut()) 
+			.then(setLoggedOut())
 			.catch((error) => console.log(error));
 	};
 
 	return (
 		<div className="App">
 			<Navbar loggedIn={loggedIn} handleLogOut={handleLogOut} />
-			{!loggedIn ? 
+			{!loggedIn ? (
 				<Routes>
-				<Route path="/" element={<NewLogin handleLogin={handleLogin}/>} />
-				<Route path="login" element={<NewLogin handleLogin={handleLogin}/>} />
-				<Route path="signup" element={<Signup handleLogin={handleLogin} />} />
+					<Route
+						path="/"
+						element={<NewLogin handleLogin={handleLogin} />}
+					/>
+					<Route
+						path="login"
+						element={<NewLogin handleLogin={handleLogin} />}
+					/>
+					<Route
+						path="signup"
+						element={<Signup handleLogin={handleLogin} />}
+					/>
 				</Routes>
-			: <Routes>
-				<Route path="/" element={<Home  />} />
-				<Route
-					path="home"
-					element={<Home />}
-				/>
-				{/* <Route path="login" element={<NewLogin />} /> */}
-			</Routes>}
+			) : (
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="home" element={<Home />} />
+					{/* <Route path="login" element={<NewLogin />} /> */}
+				</Routes>
+			)}
 		</div>
 	);
 }

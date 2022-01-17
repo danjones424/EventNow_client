@@ -10,7 +10,7 @@ const AllEventsContainer = ({ currentUser }) => {
 		fetch('/others')
 			.then((r) => r.json())
 			.then((events) => {
-				console.log(events)
+				console.log(events);
 				setFetchedEvents(events);
 				setContentLoaded(true);
 				console.log('Fetched Again!');
