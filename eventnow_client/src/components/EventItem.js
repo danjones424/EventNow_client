@@ -16,8 +16,6 @@ const EventItem = ({ eventItem, handleRSVP, currentUser, handleBail }) => {
 		backgroundColor: '#F0F757',
 	};
 
-	const event = eventItem.event;
-
 	console.log(eventItem);
 
 	// console.log(currentUser);
@@ -32,26 +30,17 @@ const EventItem = ({ eventItem, handleRSVP, currentUser, handleBail }) => {
 	return (
 		<div>
 			<Paper elevation={10} style={paperStyle}>
-				<h2>{event.event_name}</h2>
-				<h3>{event.category}</h3>
-				<p>{event.description}</p>
-				{eventItem.user_id === currentUser ? (
-					<Button
-						variant="contained"
-						style={btnstyle}
-						onClick={() => handleBail(eventItem)}
-					>
-						Bail
-					</Button>
-				) : (
-					<Button
-						variant="contained"
-						style={btnstyle}
-						onClick={() => handleRSVP(eventItem)}
-					>
-						RSVP
-					</Button>
-				)}
+				<h2>{eventItem.event_name}</h2>
+				<h3>{eventItem.category}</h3>
+				<p>{eventItem.description}</p>
+
+				<Button
+					variant="contained"
+					style={btnstyle}
+					onClick={() => handleRSVP(eventItem)}
+				>
+					RSVP
+				</Button>
 			</Paper>
 		</div>
 	);

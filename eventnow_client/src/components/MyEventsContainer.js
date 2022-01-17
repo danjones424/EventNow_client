@@ -8,7 +8,7 @@ const MyEventsContainer = ({ currentUser }) => {
 	// const [filteredEvents, setFilteredEvents] = useState({});
 
 	useEffect(() => {
-		fetch('/attending_not_host')
+		fetch('/attending')
 			.then((r) => r.json())
 			.then((events) => {
 				// FILTER EVENTS WHERE currentUser.id !== attendances.user_id

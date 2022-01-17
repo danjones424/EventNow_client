@@ -7,11 +7,11 @@ const AllEventsContainer = ({ currentUser }) => {
 	// const [filteredEvents, setFilteredEvents] = useState({});
 
 	useEffect(() => {
-		fetch('/others')
+		fetch('/events')
 			.then((r) => r.json())
-			.then((events) => {
-				console.log(events);
-				setFetchedEvents(events);
+			.then((data) => {
+				console.log(data);
+				setFetchedEvents(data);
 				setContentLoaded(true);
 				console.log('Fetched Again!');
 			});
@@ -31,9 +31,9 @@ const AllEventsContainer = ({ currentUser }) => {
 	};
 
 	const handleRSVP = (e) => {
-		console.log(e.event.id);
+		console.log(e.id);
 		console.log(currentUser.id);
-		const eventID = e.event.id;
+		const eventID = e.id;
 		const userID = currentUser.id;
 
 		fetch('/attendances', {
