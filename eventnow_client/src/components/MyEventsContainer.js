@@ -39,7 +39,12 @@ const MyEventsContainer = ({ currentUser }) => {
 		console.log(e.id);
 		fetch(`/attendances/${e.id}`, {
 			method: 'DELETE',
-		});
+		})
+			.then((r) => r.json())
+			.then((data) => {
+				console.log(data);
+				setFetchedEvents(data);
+			});
 	};
 
 	return <>{contentLoaded ? renderEvent(fetchedEvents) : null}</>;
