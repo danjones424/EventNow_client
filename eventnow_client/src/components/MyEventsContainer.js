@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import AttendingEventItem from './AttendingEventItem';
 import EventItem from './EventItem';
 
 const MyEventsContainer = ({ currentUser }) => {
@@ -24,7 +25,7 @@ const MyEventsContainer = ({ currentUser }) => {
 		return eventsToRender.map((eventItem) => {
 			console.log(eventItem);
 			return (
-				<EventItem
+				<AttendingEventItem
 					handleBail={handleBail}
 					key={Math.floor(Math.random() * 10000)}
 					eventItem={eventItem}
@@ -34,36 +35,12 @@ const MyEventsContainer = ({ currentUser }) => {
 		});
 	};
 
-	const handleBail = (e) => {
-		console.log(e);
+	const handleBail = (e = {}) => {
+		console.log(e.id);
 		fetch(`/attendances/${e.id}`, {
 			method: 'DELETE',
-		}).then((r) => r.json());
-
-		// })
-		// .then((r) => r.json())
-		// .then(console.log('Attendance created!'))
-		// .catch((error) => {
-		// 	console.error('Error:', error);
-		// });
+		});
 	};
-
-	// axios
-	// 		.post('/login', null, {
-	// 			params: {
-	// 				username,
-	// 				password,
-	// 			},
-	// 		})
-	// 		.then((resp) => {
-	// 			console.log(resp);
-	// 			setAlert(false);
-	// 			handleLogin();
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log('error', error);
-	// 			setAlert(true);
-	// 		});
 
 	return <>{contentLoaded ? renderEvent(fetchedEvents) : null}</>;
 };
