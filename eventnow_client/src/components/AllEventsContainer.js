@@ -31,8 +31,10 @@ const AllEventsContainer = ({ currentUser }) => {
 	};
 
 	const handleRSVP = (e) => {
+		console.log(e.event.id);
+		console.log(currentUser.id);
 		const eventID = e.event.id;
-		const userID = currentUser;
+		const userID = currentUser.id;
 
 		fetch('/attendances', {
 			method: 'POST',
