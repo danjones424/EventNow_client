@@ -48,7 +48,9 @@ const AllEventsContainer = ({ currentUser }) => {
 			}),
 		})
 			.then((r) => r.json())
-			.then((data) => console.log(data))
+			.then((data) => {
+				setFetchedEvents(data);
+			})
 			.catch((error) => {
 				console.error('Error:', error);
 			});

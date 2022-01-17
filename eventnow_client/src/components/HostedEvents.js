@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import EventItem from './EventItem';
 import HostedEventItem from './HostedEventItem';
 
 const HostedEvents = ({ currentUser }) => {
@@ -10,16 +11,14 @@ const HostedEvents = ({ currentUser }) => {
 		fetch('/host')
 			.then((r) => r.json())
 			.then((events) => {
-				console.log(events);
 				setFetchedEvents(events);
 				setContentLoaded(true);
 				console.log('Fetched Again!');
 			});
 	}, []);
 
-
-    const handleRefetch = () => {
-        fetch('/host')
+	const handleRefetch = () => {
+		fetch('/host')
 			.then((r) => r.json())
 			.then((events) => {
 				console.log(events);
@@ -27,44 +26,49 @@ const HostedEvents = ({ currentUser }) => {
 				setContentLoaded(true);
 				console.log('Fetched Again!');
 			});
-    }
-
-    
-	console.log(fetchedEvents);
-
-	const renderEvent = (eventsToRender) => {
-		return eventsToRender.map((eventItem) => {
-			console.log(eventItem);
-			return (
-				<HostedEventItem
-                    handleRefetch={handleRefetch}
-					key={Math.floor(Math.random() * 10000)}
-					eventItem={eventItem}
-					currentUser={currentUser}
-				/>
-			);
-		});
 	};
 
+	const handleDelete = (doomedEvent) => {
+		console.log(doomedEvent);
+		fetch(`/events/${doomedEvent.id}`, {
+			method: 'DELETE',
+		})
+			.then((r) => r.json())
+			.then((data) => {
+				console.log(data);
+				setFetchedEvents(data);
+			});
+	};
 
-	// axios
-	// 		.post('/login', null, {
-	// 			params: {
-	// 				username,
-	// 				password,
-	// 			},
-	// 		})
-	// 		.then((resp) => {
-	// 			console.log(resp);
-	// 			setAlert(false);
-	// 			handleLogin();
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log('error', error);
-	// 			setAlert(true);
-	// 		});
+	console.log(fetchedEvents);
+	console.log(contentLoaded);
 
-	return <>{contentLoaded ? renderEvent(fetchedEvents) : null}</>;
+	const renderEvents = fetchedEvents.map((eventItem) => {
+		return (
+			<HostedEventItem
+				key={eventItem.id}
+				eventItem={eventItem}
+				handleRefetch={handleRefetch}
+				handleDelete={handleDelete}
+			/>
+		);
+	});
+
+	// const renderEvent = (eventsToRender) => {
+	// 	return eventsToRender.map((eventItem) => {
+	// 		console.log(eventItem);
+	// 		return (
+	// 			<HostedEventItem
+	// 				handleRefetch={handleRefetch}
+	// 				key={Math.floor(Math.random() * 10000)}
+	// 				eventItem={eventItem}
+	// 				currentUser={currentUser}
+	// 			/>
+	// 		);
+	// 	});
+	// };
+
+	return <>{contentLoaded ? renderEvents : null}</>;
 };
 
 export default HostedEvents;
